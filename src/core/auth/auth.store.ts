@@ -1,16 +1,17 @@
 import { create } from "zustand";
-
-type User = {
-  id: string;
-  email: string;
-};
+import { User } from "./auth.types";
 
 type AuthState = {
   user: User | null;
-  setUser: (u: User | null) => void;
+  setUser: (user: User | null) => void;
+  logout: () => void;
 };
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   setUser: (user) => set({ user }),
+  logout: () => {
+    set({ user: null });
+    document.cookie = "access_token=; Max-Age=0; path=/";
+  },
 }));
