@@ -1,0 +1,1 @@
+export const PAYROLL_CREATED = "PAYROLL_CREATED";
