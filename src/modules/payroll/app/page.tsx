@@ -1,7 +1,7 @@
 import { getPayrolls } from "../services/getPayrolls";
 import { PayrollFilter } from "../components/PayrollFilter";
 
-export async function PayrollPage() {
+export default async function PayrollPage() {
   const payrolls = await getPayrolls();
 
   return (

@@ -1,14 +1,13 @@
-"use client";
+// app/providers/AuthProvider.tsx
+import { getCurrentUser } from "@/core/auth/auth.server";
+import { AuthHydrator } from "./AuthHydrator";
 
-import { ReactNode, useEffect } from "react";
-import { useAuthStore } from "@/core/auth/auth.store";
+export default async function AuthProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const user = await getCurrentUser();
 
-export function AuthProvider({ children }: { children: ReactNode }) {
-  const setUser = useAuthStore((s) => s.setUser);
-
-  useEffect(() => {
-    // future: hydrate user from /me API
-  }, [setUser]);
-
-  return children;
+  return <AuthHydrator user={user}>{children}</AuthHydrator>;
 }
